@@ -25,6 +25,9 @@
     <!-- Morris Chart Css-->
     <link href="{{ asset('adminBSB') }}/plugins/morrisjs/morris.css" rel="stylesheet" />
 
+    <!-- JQuery DataTable Css -->
+    <link href="{{ asset('adminBSB') }}/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
     <!-- Custom Css -->
     <link href="{{ asset('adminBSB') }}/css/style.css" rel="stylesheet">
 

@@ -15,7 +15,7 @@
                         </div>
                         <div class="content">
                             <div class="text text-uppercase">Dokumen Arsip</div>
-                            <div class="number count-to" data-from="0" data-to="100" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to="100" data-speed="2000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>

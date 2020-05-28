@@ -36,6 +36,12 @@
                     <span>Home</span>
                 </a>
             </li>
+            @php
+                $module = ['user'];
+            @endphp
+            @for ($i = 0; $i < sizeof($module); $i++)
+                @include($module[$i] . "::sidebar")
+            @endfor
         </ul>
     </div>
     <!-- #Menu -->

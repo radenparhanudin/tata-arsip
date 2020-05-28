@@ -16,22 +16,16 @@
 <!-- Jquery CountTo Plugin Js -->
 <script src="{{ asset('adminBSB') }}/plugins/jquery-countto/jquery.countTo.js"></script>
 
-<!-- Morris Plugin Js -->
-<script src="{{ asset('adminBSB') }}/plugins/raphael/raphael.min.js"></script>
-<script src="{{ asset('adminBSB') }}/plugins/morrisjs/morris.js"></script>
-
-<!-- ChartJs -->
-<script src="{{ asset('adminBSB') }}/plugins/chartjs/Chart.bundle.js"></script>
-
-<!-- Flot Charts Plugin Js -->
-<script src="{{ asset('adminBSB') }}/plugins/flot-charts/jquery.flot.js"></script>
-<script src="{{ asset('adminBSB') }}/plugins/flot-charts/jquery.flot.resize.js"></script>
-<script src="{{ asset('adminBSB') }}/plugins/flot-charts/jquery.flot.pie.js"></script>
-<script src="{{ asset('adminBSB') }}/plugins/flot-charts/jquery.flot.categories.js"></script>
-<script src="{{ asset('adminBSB') }}/plugins/flot-charts/jquery.flot.time.js"></script>
-
-<!-- Sparkline Chart Plugin Js -->
-<script src="{{ asset('adminBSB') }}/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+<!-- Jquery DataTable Plugin Js -->
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+<script src="{{ asset('adminBSB') }}/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
 <!-- Custom Js -->
 <script src="{{ asset('adminBSB') }}/js/admin.js"></script>
@@ -39,3 +33,5 @@
 
 <!-- Demo Js -->
 <script src="{{ asset('adminBSB') }}/js/demo.js"></script>
+
+@stack('scripts')

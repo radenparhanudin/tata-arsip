@@ -36,6 +36,34 @@
                     <span>Home</span>
                 </a>
             </li>
+            <li class="{{ set_active(['master-data.index']) }}">
+                <a href="javascript:void(0)" class="menu-toggle">
+                    <i class="material-icons">dvr</i>
+                    <span>Master Data</span>
+                </a>
+                <ul class="ml-menu">
+                    <li>
+                        <a href="{{ route('master-data.index', ['params' => 'pegawai']) }}">
+                            <span>Data Pegawai</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('master-data.index', ['params' => 'unit-kerja']) }}">
+                            <span>Data Unit Kerja</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('master-data.index', ['params' => 'jenis-jabatan']) }}">
+                            <span>Data Jenis Jabatan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('master-data.index', ['params' => 'jabatan']) }}">
+                            <span>Data Jabatan</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
              <li class="{{ set_active('rekon.index') }}">
                 <a href="{{ route('rekon.index') }}">
                     <i class="material-icons">laptop</i>

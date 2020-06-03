@@ -77,3 +77,4 @@
 @push('scripts')
 <script src="{{ asset('public/js/pages/user.js') }}"></script>
 @endpush
+

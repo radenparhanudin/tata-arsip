@@ -46,3 +46,12 @@
         </div>
     </section>
 @endsection
+@push('plugins-js')
+    <script src="{{ asset('public/adminBSB') }}/plugins/jquery-countto/jquery.countTo.js"></script>
+@endpush
+
+@push('scripts')
+    <script>
+        $('.count-to').countTo();
+    </script>
+@endpush

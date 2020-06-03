@@ -49,14 +49,15 @@ class UserController extends Controller
                 'roles_generate' => 'required'
             ]);
             
-            $data_pegawai =  Pegawai::all();
-
+            // $data_pegawai =  Pegawai::all();
+            $data_pegawai =  Pegawai::leftJoin('users', 'users.pegawai_id', '=', 'tbl_pegawai.id')->whereNull('users.pegawai_id')->select('tbl_pegawai.*')->get();
             foreach ($data_pegawai as $dp) {
                 $user = User::create([
-                    'name'     => $dp->nama,
-                    'username' => $dp->nip_baru,
-                    'email'    => $dp->nip_baru . '@gmail.com',
-                    'password' => Hash::make($dp->nip_baru),
+                    'name'       => $dp->nama,
+                    'username'   => $dp->nip_baru,
+                    'email'      => $dp->nip_baru . '@gmail.com',
+                    'password'   => Hash::make($dp->nip_baru),
+                    'pegawai_id' => $dp->id
                 ]);
                 $user->assignRole($request->get('roles_generate'));
             }

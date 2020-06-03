@@ -11187,3 +11187,40 @@ html.ie11 .dropdown-menu ul.menu li a {
 html.ie11 .bs-searchbox .form-control {
     width: 90%;
 }
+
+.btn-show i.material-icons,
+.btn-edit i.material-icons,
+.btn-delete i.material-icons {
+    font-size: 18px;
+    color: #00000080;
+}
+
+.btn-show i.material-icons:hover,
+.btn-edit i.material-icons:hover,
+.btn-delete i.material-icons:hover {
+    color: #000000;
+}
+
+.font-size-19 {
+    font-size: 19px !important;
+}
+.swal2-popup {
+    font-size: 1.2rem !important;
+}
+
+.cNumber,
+.cAction {
+    text-align: center !important;
+}
+
+.cNumber {
+    width: 20px !important;
+}
+
+.cAction {
+    width: 50px !important;
+}
+
+.px-2 {
+    margin: 0px 5px !important;
+}

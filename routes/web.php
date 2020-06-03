@@ -19,6 +19,16 @@ Route::get('/', function () {
     }
 });
 
-Auth::routes();
+// Auth::routes();
+Route::namespace('Auth')->group(function(){
+	Route::get('masuk','LoginController@showLoginForm')->name('login');
+	Route::post('masuk','LoginController@login');
+	Route::post('keluar','LoginController@logout')->name('logout');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('user', 'UserController');
+    Route::get('table/user', 'UserController@dataTable')->name('table.user');
+});

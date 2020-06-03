@@ -2,7 +2,7 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            <img src="{{ asset('adminBSB') }}/images/user.png" width="48" height="48" alt="User" />
+            <img src="{{ asset('public/adminBSB') }}/images/user.png" width="48" height="48" alt="User" />
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</div>
@@ -36,12 +36,12 @@
                     <span>Home</span>
                 </a>
             </li>
-            @php
-                $module = ['user'];
-            @endphp
-            @for ($i = 0; $i < sizeof($module); $i++)
-                @include($module[$i] . "::sidebar")
-            @endfor
+            <li class="{{ set_active('user.index') }}">
+                <a href="{{ route('user.index') }}">
+                    <i class="material-icons">person</i>
+                    <span>User Manajemen</span>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- #Menu -->

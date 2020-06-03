@@ -14,9 +14,9 @@ class AddJabatanUnitKerjaToTblPegagaiTable extends Migration
     public function up()
     {
         Schema::table('tbl_pegawai', function (Blueprint $table) {
-            $table->unsignedBigInteger('jabatan_id');
+            $table->unsignedBigInteger('jabatan_id')->nullable();
             $table->foreign('jabatan_id')->references('id')->on('tbl_jabatan')->onDelete('cascade');
-            $table->unsignedBigInteger('unit_kerja-id');
+            $table->unsignedBigInteger('unit_kerja-id')->nullable();
             $table->foreign('unit_kerja-id')->references('id')->on('tbl_unit_kerja')->onDelete('cascade');
         });
     }

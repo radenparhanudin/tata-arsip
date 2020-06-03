@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Pegawai;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;  
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -22,7 +23,8 @@ class UserController extends Controller
             'username'              => 'required|unique:users',
             'email'                 => 'email|unique:users',
             'password'              => 'required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'required'
+            'password_confirmation' => 'required',
+            'roles'                 => 'required'
         ]);
 
         $user = User::create([
@@ -40,6 +42,34 @@ class UserController extends Controller
         ]);
     }
 
+    public function generate(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->validate([
+                'roles_generate' => 'required'
+            ]);
+            
+            $data_pegawai =  Pegawai::all();
+
+            foreach ($data_pegawai as $dp) {
+                $user = User::create([
+                    'name'     => $dp->nama,
+                    'username' => $dp->nip_baru,
+                    'email'    => $dp->nip_baru . '@gmail.com',
+                    'password' => Hash::make($dp->nip_baru),
+                ]);
+                $user->assignRole($request->get('roles_generate'));
+            }
+            
+            return response()->json([
+                'success' => True,
+                'message' => 'Generate User Successfully'
+            ]);
+
+        }else{
+            return abort(404);
+        }
+    }
     public function edit($id, Request $request)
     {
         if ($request->ajax()) {
@@ -174,7 +204,7 @@ class UserController extends Controller
     {
         $roles = $user->getRoleNames();
         for ($i=0; $i < sizeof($roles); $i++) { 
-            $roleUser[] = ($i+1) .'. '.ucwords(str_replace("-", " ", $roles[$i]));
+            $roleUser[] = ucwords(str_replace("-", " ", $roles[$i]));
         }
         return implode("<br/>", $roleUser);
     }

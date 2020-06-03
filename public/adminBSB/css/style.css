@@ -6258,6 +6258,7 @@ section.content {
 .table-bordered tbody tr th {
     padding: 10px;
     border: 1px solid #eee;
+    vertical-align: middle;
 }
 
 .table-bordered thead tr th {

@@ -19,8 +19,8 @@
                                     <i class="material-icons">more_vert</i>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="#" data-toggle="modal" data-target="#defaultModal">Create User</a></li>
-                                    <li><a href="javascript:void(0);">Generate User</a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#defaultModal">Create User</a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#generate">Generate User</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -48,6 +48,7 @@
         </div>
     </section>
     @include('pages.user.form')
+    @include('pages.user.generate')
 @endsection
 
 @push('style')

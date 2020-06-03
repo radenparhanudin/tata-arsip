@@ -36,6 +36,12 @@
                     <span>Home</span>
                 </a>
             </li>
+             <li class="{{ set_active('rekon.index') }}">
+                <a href="{{ route('rekon.index') }}">
+                    <i class="material-icons">laptop</i>
+                    <span>Rekon Data</span>
+                </a>
+            </li>
             <li class="{{ set_active('user.index') }}">
                 <a href="{{ route('user.index') }}">
                     <i class="material-icons">person</i>

@@ -4,6 +4,7 @@ $(document).ready(function() {
         dataTableUser = $("base").attr('href') + "/table/user",
         tabel         = $('#tableUser'),
         form          = $('#defaultModal form'),
+        formGenerate  = $('#generate form'),
         defaultModal  = $("#defaultModal");
 		
 
@@ -17,7 +18,7 @@ $(document).ready(function() {
         toast: true,
         position: 'middle-center',
         showConfirmButton: false,
-        timer: 9000
+        timer: 2000
     });
 
 	var tableUser = tabel.DataTable({
@@ -79,6 +80,60 @@ $(document).ready(function() {
 	                });
 	            }
 	        }
+        })
+    });
+
+    formGenerate.submit(function(event) {
+        event.preventDefault()
+        action        = formGenerate.attr('action');
+        method        = formGenerate.attr('method');
+        data          = formGenerate.serialize();
+
+        form.find('label.error').remove();
+        form.find('.form-line').removeClass('error');
+
+        $.ajax({
+            url: action,
+            type: method,
+            data: data,
+            beforeSend: function(){
+                Swal.fire({
+                    title: 'Mohon Menunggu ... .!',
+                    html: 'Proses Generate data sedang berjalan ... .',
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    }
+                })
+            },
+            success: function(response){
+                if (response.success) {
+                    $('#generate').modal("hide");
+                    Toast.fire({
+                        type: 'success',
+                        title: response.message
+                    })
+                }
+
+                 if (response.errors) {
+                    Toast.fire({
+                        type: 'error',
+                        title: response.message
+                    })
+                }
+                
+            },
+            error : function (xhr) {
+                Swal.close()
+                var res = xhr.responseJSON;
+                if ($.isEmptyObject(res) == false) {
+                    $.each(res.errors, function (key, value) {
+                        $('#' + key)
+                            .closest('.form-line')
+                            .addClass('error')
+                            .append('<label class="error">' + value + '</label>');
+                    });
+                }
+            }
         })
     });
 
@@ -158,10 +213,18 @@ $(document).ready(function() {
         defaultModal.find('.modal-title').text('Create User');
         form.find('button[type=submit]').text('Create User')
 
-        $('select').val(null)
-        $('select').selectpicker('refresh')
+        $('#roles').val(null)
+        $('#roles').selectpicker('refresh')
         form.find('label.error').remove();
         form.find('.form-line').removeClass('error');
+        tableUser.ajax.reload(null,false);
+    });
+
+    $('#generate').on('hidden.bs.modal', function () {
+        $('#roles_generate').val(null)
+        $('#roles_generate').selectpicker('refresh')
+        formGenerate.find('label.error').remove();
+        formGenerate.find('.form-line').removeClass('error');
         tableUser.ajax.reload(null,false);
     });
 });

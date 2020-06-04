@@ -59,6 +59,23 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::resource('uploadsk', 'ArsipController');
         Route::get('table/uploadsk', 'ArsipController@dataTable')->name('table.uploadsk');
+
+        // Download Data
+        Route::group(['prefix' => 'download'], function() {
+            Route::get('/sk/collective/{idsk}', 'DownloadController@collective')->name('download.sk.collective');
+        });
+    });
+
+    Route::group(['middleware' => 'role:pegawai|data-informasi|bidang-mutasi'], function() {
+        Route::group(['prefix' => 'download'], function() {
+            Route::get('/sk', 'DownloadController@sk')->name('download.sk.index');
+        });
+    });
+
+    Route::group(['middleware' => 'role:pegawai'], function() {
+        Route::group(['prefix' => 'download'], function() {
+            Route::get('/sk/single/{idarsip}', 'DownloadController@single')->name('download.sk.single');
+        });
     });
 
     Route::get('/data/pegawai', 'DataController@pegawai')->name('data.pegawai');

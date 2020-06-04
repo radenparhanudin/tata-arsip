@@ -15,7 +15,7 @@
                         </div>
                         <div class="content">
                             <div class="text text-uppercase">Dokumen Arsip</div>
-                            <div class="number count-to" data-from="0" data-to="100" data-speed="2000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to="{{ $arsip }}" data-speed="2000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
@@ -36,13 +36,55 @@
                             <i class="material-icons">person_add</i>
                         </div>
                         <div class="content">
-                            <div class="text text-uppercase">Pengunjung</div>
-                            <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="text text-uppercase">Data Pegawai</div>
+                            <div class="number count-to" data-from="0" data-to="{{ $pegawai }}" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- #END# Widgets -->
+
+            @hasrole('administrator')
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    <h2>Selamat Datang {{ ucwords(Auth::user()->getRoleNames()[0]) }}</h2>
+                </div>
+            </div>
+            @endhasrole
+            @hasrole('data-informasi|bidang-mutasi')
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    <h2>Selamat Datang {{ ucwords(Auth::user()->getRoleNames()[0]) }}</h2>
+                </div>
+            </div>
+            @endhasrole
+            @hasrole('pegawai')
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Detail Login</h2>
+                        </div>
+                        <div class="body">
+                            <table width="100%">
+                                <tr>
+                                    <td><strong>Username</strong></td>
+                                    <td>: {{ Auth::user()->username }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email Address</td>
+                                    <td>: {{ Auth::user()->email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Role</td>
+                                    <td>: {{ Auth::user()->getRoleNames() }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endhasrole
         </div>
     </section>
 @endsection

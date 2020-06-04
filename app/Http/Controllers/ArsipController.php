@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Arsip;
+use App\Model\NomorSK;
 use App\Model\Pegawai;
 use File;
 use Illuminate\Http\Request;
@@ -22,6 +23,8 @@ class ArsipController extends Controller
 
         $req_pegawai_id = explode(" - ", $request->pegawai_id);
         $pegawai        = Pegawai::where('nip_baru', $req_pegawai_id[0])->first();
+        
+        $data_sk        = NomorSK::find($request->sk_id);
         
         $count_arsip    = Arsip::where('sk_id', $request->sk_id)->where('pegawai_id', $pegawai['id'])->get()->count();
 
@@ -47,7 +50,7 @@ class ArsipController extends Controller
 
         if (in_array($getClientOriginalExtension, $ext)) {
             if ($getClientSize < $maxSizeUpload) {
-                $file->move('public/upload/sk', $filename);
+                $file->move('public/upload/sk/'.$data_sk['tanggal_sk'].'/', $filename);
                 Arsip::create([
                     'sk_id'         => $request->get('sk_id'),
                     'pegawai_id'    => $pegawai['id'],
@@ -80,8 +83,10 @@ class ArsipController extends Controller
     {
         if ($request->ajax() == TRUE) {
             $deleteID = Arsip::find($id);
+            $data_sk        = NomorSK::find($deleteID['sk_id']);
+
             if ($deleteID) {
-                File::delete('public/upload/sk/'.$deleteID->file_arsip);
+                File::delete('public/upload/sk/'.$data_sk['tanggal_sk'].'/'.$deleteID->file_arsip);
                 Arsip::destroy($id);
                 $data = array(
                     "success" => true,
@@ -115,8 +120,6 @@ class ArsipController extends Controller
                 ->addColumn('action', function ($model) {
                     return view('component._action', [
                         'model' => $model,
-                        // 'url_show' => route('Nomor SK.show', $model->id),
-                        // 'url_edit' => route('uploadsk.edit', $model->id),
                         'url_destroy' => route('uploadsk.destroy', $model->id)
                     ]);
                 })

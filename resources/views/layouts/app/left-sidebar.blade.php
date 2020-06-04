@@ -36,6 +36,15 @@
                     <span>Home</span>
                 </a>
             </li>
+            @hasrole('pegawai')
+                <li class="{{ set_active('download.sk.index') }}">
+                    <a href="{{ route('download.sk.index') }}">
+                        <i class="material-icons">archive</i>
+                        <span>Download SK</span>
+                    </a>
+                </li>
+            @endhasrole
+            
             @hasrole(['data-informasi'])
                 <li class="{{ set_active(['nosk.index','uploadsk.index']) }}">
                     <a href="javascript:void(0)" class="menu-toggle">
@@ -55,7 +64,14 @@
                         </li>
                     </ul>
                 </li>
+                <li class="{{ set_active('download.sk.index') }}">
+                    <a href="{{ route('download.sk.index') }}">
+                        <i class="material-icons">archive</i>
+                        <span>Download Data SK</span>
+                    </a>
+                </li>
             @endhasrole
+
             @hasrole('administrator')
                 <li class="{{ set_active(['master-data.index']) }}">
                     <a href="javascript:void(0)" class="menu-toggle">

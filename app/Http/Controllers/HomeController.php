@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Arsip;
+use App\Model\Pegawai;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -26,6 +28,8 @@ class HomeController extends Controller
     {
         $data = array(
             'users_register' => User::all()->count(),
+            'arsip' => Arsip::all()->count(),
+            'pegawai' => Pegawai::all()->count(),
         );
         return view('home', $data);
     }

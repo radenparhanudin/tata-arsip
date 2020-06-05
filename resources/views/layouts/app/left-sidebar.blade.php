@@ -36,46 +36,68 @@
                     <span>Home</span>
                 </a>
             </li>
-            <li class="{{ set_active(['master-data.index']) }}">
-                <a href="javascript:void(0)" class="menu-toggle">
-                    <i class="material-icons">dvr</i>
-                    <span>Master Data</span>
-                </a>
-                <ul class="ml-menu">
-                    <li>
-                        <a href="{{ route('master-data.index', ['params' => 'pegawai']) }}">
-                            <span>Data Pegawai</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('master-data.index', ['params' => 'unit-kerja']) }}">
-                            <span>Data Unit Kerja</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('master-data.index', ['params' => 'jenis-jabatan']) }}">
-                            <span>Data Jenis Jabatan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('master-data.index', ['params' => 'jabatan']) }}">
-                            <span>Data Jabatan</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-             <li class="{{ set_active('rekon.index') }}">
-                <a href="{{ route('rekon.index') }}">
-                    <i class="material-icons">laptop</i>
-                    <span>Rekon Data</span>
-                </a>
-            </li>
-            <li class="{{ set_active('user.index') }}">
-                <a href="{{ route('user.index') }}">
-                    <i class="material-icons">person</i>
-                    <span>User Manajemen</span>
-                </a>
-            </li>
+            @hasrole(['data-informasi'])
+                <li class="{{ set_active(['nosk.index','uploadsk.index']) }}">
+                    <a href="javascript:void(0)" class="menu-toggle">
+                        <i class="material-icons">unarchive</i>
+                        <span>Upload Data SK</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="{{ set_active('uploadsk.index') }}">
+                            <a href="{{ route('uploadsk.index') }}">
+                                <span>Upload SK</span>
+                            </a>
+                        </li>
+                        <li class="{{ set_active('nosk.index') }}">
+                            <a href="{{ route('nosk.index') }}">
+                                <span>Nomor SK</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endhasrole
+            @hasrole('administrator')
+                <li class="{{ set_active(['master-data.index']) }}">
+                    <a href="javascript:void(0)" class="menu-toggle">
+                        <i class="material-icons">dvr</i>
+                        <span>Master Data</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{ route('master-data.index', ['params' => 'pegawai']) }}">
+                                <span>Data Pegawai</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('master-data.index', ['params' => 'unit-kerja']) }}">
+                                <span>Data Unit Kerja</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('master-data.index', ['params' => 'jenis-jabatan']) }}">
+                                <span>Data Jenis Jabatan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('master-data.index', ['params' => 'jabatan']) }}">
+                                <span>Data Jabatan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ set_active('rekon.index') }}">
+                    <a href="{{ route('rekon.index') }}">
+                        <i class="material-icons">laptop</i>
+                        <span>Rekon Data</span>
+                    </a>
+                </li>
+                <li class="{{ set_active('user.index') }}">
+                    <a href="{{ route('user.index') }}">
+                        <i class="material-icons">person</i>
+                        <span>User Manajemen</span>
+                    </a>
+                </li>
+            @endhasrole
         </ul>
     </div>
     <!-- #Menu -->

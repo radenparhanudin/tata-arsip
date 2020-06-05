@@ -20,6 +20,10 @@ class CreateTblArsipTable extends Migration
             $table->unsignedBigInteger('pegawai_id');
             $table->foreign('pegawai_id')->references('id')->on('tbl_pegawai')->onDelete('cascade');
             $table->string('file_arsip');
+            $table->unsignedBigInteger('jabatan_id')->nullable();
+            $table->foreign('jabatan_id')->references('id')->on('tbl_jabatan')->onDelete('cascade');
+            $table->unsignedBigInteger('unit_kerja_id')->nullable();
+            $table->foreign('unit_kerja_id')->references('id')->on('tbl_unit_kerja')->onDelete('cascade');
             $table->timestamps();
         });
     }

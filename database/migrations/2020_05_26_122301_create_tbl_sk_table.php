@@ -17,6 +17,7 @@ class CreateTblSkTable extends Migration
             $table->bigIncrements('id');
             $table->string('tentang');
             $table->string('nomor');
+            $table->date('tanggal_sk');
             $table->timestamps();
         });
     }

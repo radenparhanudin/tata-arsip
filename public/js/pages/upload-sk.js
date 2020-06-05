@@ -29,21 +29,21 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'DT_RowIndex', name: 'id', className: 'cNumber'},
-            { data: 'sk_id', name: 'sk_id' },
-            { data: 'sk_id', name: 'sk_id' },
-            { data: 'pegawai_id', name: 'pegawai_id' },
-            { data: 'pegawai_id', name: 'pegawai_id' },
-            { data: 'pegawai_id', name: 'pegawai_id' },
-            { data: 'pegawai_id', name: 'pegawai_id' },
+            { data: 'tanggal_sk', name: 'tanggal_sk' },
+            { data: 'no_sk', name: 'no_sk' },
+            { data: 'nip_baru', name: 'nip_baru' },
+            { data: 'nama_pegawai', name: 'nama_pegawai' },
+            { data: 'nama_jabatan', name: 'nama_jabatan' },
+            { data: 'unit_kerja', name: 'unit_kerja' },
             { data: 'action', name: 'action', className: 'cAction'},
         ],
     });
 
 	form.submit(function(event) {
         event.preventDefault();
-        action        = form.attr('action');
-		method        = form.attr('method');
-		data          = form.serialize();
+        action = form.attr('action');
+        method = form.attr('method');
+        data   = new FormData(form[0]);
 
         form.find('label.error').remove();
     	form.find('.form-line').removeClass('error');
@@ -52,8 +52,20 @@ $(document).ready(function() {
             url: action,
             type: method,
             data: data,
-            success: function(response){
-
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function(){
+                Swal.fire({
+                    title: 'Mohon Menunggu ... .!',
+                    html: 'Proses Uploading data SK sedang berjalan ... .',
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    }
+                })
+            },
+            success:function (response) {
+                Swal.close()
                 if (response.success) {
                     defaultModal.modal("hide");
                     Toast.fire({
@@ -68,21 +80,23 @@ $(document).ready(function() {
                         title: response.message
                     })
                 }
-                
             },
             error : function (xhr) {
-	            var res = xhr.responseJSON;
-	            console.log(res)
-	            if ($.isEmptyObject(res) == false) {
-	                $.each(res.errors, function (key, value) {
-	                    $('#' + key)
-	                        .closest('.form-line')
-	                        .addClass('error')
-	                        .append('<label class="error">' + value + '</label>');
-	                });
-	            }
-	        }
-        })
+                var res = xhr.responseJSON;
+                console.log(res)
+                if ($.isEmptyObject(res) == false) {
+                    Swal.close()
+                    $.each(res.errors, function (key, value) {
+                        $('#' + key)
+                            .closest('.form-line')
+                            .addClass('error')
+                         $('#' + key)
+                            .closest('.form-group')
+                            .append('<label class="error">' + value + '</label>');
+                    });
+                }
+            }
+        });
     });
 
     tabel.on('click', '.btn-edit', function(event) {

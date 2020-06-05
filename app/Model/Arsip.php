@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Arsip extends Model
 {
     protected $table    = 'tbl_arsip';
-	protected $fillable = ['sk_id', 'pegawai_id', 'file_arsip'];
+	protected $fillable = ['sk_id', 'pegawai_id', 'file_arsip', 'jabatan_id', 'unit_kerja_id'];
 }
